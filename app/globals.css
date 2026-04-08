@@ -357,6 +357,159 @@ h1 strong {
   max-width: 440px; margin-bottom: 2.5rem;
 }
 
+/* ── Stax page ───────────────────────────────── */
+.stax-section {
+  padding: 5rem;
+  border-top: 1px solid var(--border);
+}
+.stax-section-alt {
+  background: var(--white);
+}
+.stax-section-header {
+  margin-bottom: 3.5rem;
+}
+.stax-gender-badge {
+  display: inline-flex; align-items: center;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 5px 14px; border-radius: 100px;
+  margin-bottom: 1rem;
+}
+.stax-gender-men {
+  background: rgba(79,142,247,0.1);
+  color: #4f8ef7;
+  border: 1px solid rgba(79,142,247,0.25);
+}
+.stax-gender-women {
+  background: rgba(232,121,249,0.1);
+  color: #e879f9;
+  border: 1px solid rgba(232,121,249,0.25);
+}
+.stax-section-title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 300; letter-spacing: -1.5px; line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+.stax-section-title strong { font-weight: 700; }
+.stax-section-sub {
+  font-size: 0.92rem; color: var(--muted); line-height: 1.75;
+  max-width: 520px; font-weight: 300;
+}
+
+.stax-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.stax-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+}
+.stax-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+}
+
+.stax-card-header {
+  padding: 2rem;
+  position: relative;
+}
+.stax-card-tag {
+  display: inline-flex; align-items: center;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 100px;
+  border: 1px solid; margin-bottom: 1.2rem;
+}
+.stax-card-gender {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+  margin-bottom: 0.3rem;
+}
+.stax-card-name {
+  font-size: 2rem; font-weight: 700; letter-spacing: -1px;
+  line-height: 1; margin-bottom: 0.3rem;
+}
+.stax-card-subtitle {
+  font-size: 0.75rem; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em; margin-bottom: 1rem;
+}
+.stax-card-desc {
+  font-size: 0.85rem; color: rgba(255,255,255,0.6);
+  line-height: 1.75; font-weight: 300;
+}
+
+.stax-card-body {
+  padding: 2rem;
+  background: var(--white);
+  flex: 1; display: flex; flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+.stax-section-label {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.stax-supps {
+  display: flex; flex-direction: column; gap: 0;
+}
+.stax-supp-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.stax-supp-row:first-child { border-top: 1px solid var(--border); }
+.stax-supp-left {
+  display: flex; flex-direction: column; gap: 2px;
+  min-width: 130px;
+}
+.stax-supp-name {
+  font-size: 0.82rem; font-weight: 600; color: var(--ink);
+}
+.stax-supp-dose {
+  font-size: 0.7rem; color: var(--muted); font-weight: 400;
+}
+.stax-supp-role {
+  font-size: 0.75rem; color: var(--muted); line-height: 1.55;
+  text-align: right; font-weight: 300;
+}
+
+.stax-expect-list {
+  list-style: none; display: flex; flex-direction: column; gap: 0.6rem;
+  margin-bottom: 2rem; flex: 1;
+}
+.stax-expect-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.82rem; color: var(--ink-2); line-height: 1.6;
+}
+.stax-expect-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--muted-2); flex-shrink: 0; margin-top: 7px;
+}
+
+.stax-card-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ink); color: #fff; text-decoration: none;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 13px 20px; border-radius: 4px;
+  transition: opacity .2s, transform .15s;
+  align-self: flex-start; margin-top: auto;
+}
+.stax-card-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+.stax-card-cta svg { transition: transform .2s; }
+.stax-card-cta:hover svg { transform: translateX(3px); }
+
+.stax-disclaimer {
+  padding: 1.5rem 5rem;
+  font-size: 0.68rem; color: var(--muted); line-height: 1.7;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
 /* ── Footer ──────────────────────────────────── */
 .site-footer {
   padding: 2rem 5rem;
@@ -370,6 +523,9 @@ h1 strong {
 
 /* ── Responsive ──────────────────────────────── */
 @media (max-width: 960px) {
+  .stax-grid { grid-template-columns: 1fr; }
+  .stax-section { padding: 4rem 2rem; }
+  .stax-disclaimer { padding: 1.5rem 2rem; }
   .hiw-stats { grid-template-columns: repeat(2, 1fr); }
   .hiw-stat { border-bottom: 1px solid var(--border); }
   .hiw-values-grid { grid-template-columns: repeat(2, 1fr); }

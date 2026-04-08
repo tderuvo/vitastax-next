@@ -112,7 +112,11 @@ export default function HowItWorks() {
             Vitastax<span className="nav-logo-tm">™</span>
           </span>
         </Link>
-        <Link href="/#notify" className="nav-cta">Get Early Access</Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <Link href="/how-it-works" className="nav-link" style={{ color: 'var(--ink)', fontWeight: 600 }}>How It Works</Link>
+          <Link href="/stax" className="nav-link">Our Stax</Link>
+          <Link href="/#notify" className="nav-cta">Get Early Access</Link>
+        </div>
       </nav>
 
       {/* ── Page hero ── */}
