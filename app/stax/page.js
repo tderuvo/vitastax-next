@@ -14,7 +14,7 @@ const menStax = [
     subtitle:  'Men\'s Daily Essentials',
     tag:       'Most Popular',
     color:     '#1a1a2e',
-    accent:    '#4f8ef7',
+    accent:    '#1D4ED8',
     description: 'The baseline every man should have. Built to fill the nutritional gaps in a modern diet and support your body\'s core systems — energy, immunity, and recovery.',
     supplements: [
       { name: 'Vitamin D3',         dose: '2,000 IU',  role: 'Bone density, testosterone support, immune function' },
@@ -37,7 +37,7 @@ const menStax = [
     subtitle:  'Men\'s Memory & Focus',
     tag:       'Cognitive Edge',
     color:     '#0d1f2d',
-    accent:    '#38bdf8',
+    accent:    '#1D4ED8',
     description: 'Designed for the man who wants to stay sharp. This stack targets the key pathways involved in focus, memory retention, and mental clarity — without stimulants.',
     supplements: [
       { name: 'Lion\'s Mane Mushroom', dose: '500 mg',  role: 'Nerve growth factor support, memory and cognitive function' },
