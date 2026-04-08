@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const LAUNCH_DATE = new Date('2026-07-01T00:00:00');
 
@@ -47,15 +48,20 @@ export default function Home() {
     <>
       {/* ── Nav ── */}
       <nav className="nav">
-        <a href="/" className="nav-logo">
+        <Link href="/" className="nav-logo">
           <LogoMark />
           <span className="nav-logo-name">
             Vitastax<span className="nav-logo-tm">™</span>
           </span>
-        </a>
-        <a href="#notify" className="nav-cta">
-          Get Early Access
-        </a>
+        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <Link href="/how-it-works" className="nav-link">
+            How It Works
+          </Link>
+          <Link href="#notify" className="nav-cta">
+            Get Early Access
+          </Link>
+        </div>
       </nav>
 
       {/* ── Hero ── */}
