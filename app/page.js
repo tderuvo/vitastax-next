@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import ProductSVG from '@/components/ProductSVG';
+import Image from 'next/image';
 
 const LAUNCH_DATE = new Date('2026-07-01T00:00:00');
 
@@ -20,16 +20,10 @@ function getTimeLeft() {
   };
 }
 
-const FEATURES = [
-  '30 daily packs / month',
-  'Custom supplement program',
-  'Carry anywhere',
-  'Monthly subscription',
-];
-
-const CheckIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.2" strokeLinecap="round">
-    <polyline points="20 6 9 17 4 12"/>
+const LogoMark = () => (
+  <svg className="nav-logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 4L4 12L10 20L16 28L22 20L28 12L16 4Z" stroke="#111" strokeWidth="2" strokeLinejoin="round"/>
+    <path d="M4 12L16 20L28 12" stroke="#111" strokeWidth="2" strokeLinejoin="round"/>
   </svg>
 );
 
@@ -51,122 +45,131 @@ export default function Home() {
 
   return (
     <>
-      <div className="page">
+      {/* ── Nav ── */}
+      <nav className="nav">
+        <a href="/" className="nav-logo">
+          <LogoMark />
+          <span className="nav-logo-name">
+            Vitastax<span className="nav-logo-tm">™</span>
+          </span>
+        </a>
+        <a href="#notify" className="nav-cta">
+          Get Early Access
+        </a>
+      </nav>
 
-        {/* Logo */}
-        <div className="logo">
-          <div className="logo-icon">⚡</div>
-          <span className="logo-name">VitaStax</span>
+      {/* ── Hero ── */}
+      <section className="hero">
+
+        {/* Left: copy */}
+        <div className="hero-left">
+          <p className="eyebrow">Personalized Daily Supplements</p>
+
+          <h1>
+            Your Daily<br />
+            <strong>Formula.</strong>
+          </h1>
+
+          <p className="tagline">
+            Personalized. Precise. Delivered Monthly.<br />
+            30 daily stacks built for your body — carried in your pocket.
+          </p>
+
+          <ul className="feature-list">
+            <li className="feature-item">
+              <span className="feature-item-label">Built for you</span>
+              <span className="feature-item-value">Tailored to your age, goals &amp; health needs</span>
+            </li>
+            <li className="feature-item">
+              <span className="feature-item-label">Mailed monthly</span>
+              <span className="feature-item-value">30 daily stacks. Zero guesswork.</span>
+            </li>
+            <li className="feature-item">
+              <span className="feature-item-label">Always on point</span>
+              <span className="feature-item-value">Real ingredients. Right doses. Every day.</span>
+            </li>
+          </ul>
+
+          <button className="cta-btn">
+            Get Your Stack
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+
+          <div className="trust-row">
+            <span className="trust-badge">Science-Backed</span>
+            <span className="trust-sep">|</span>
+            <span className="trust-badge">cGMP Certified</span>
+            <span className="trust-sep">|</span>
+            <span className="trust-badge">Made for You</span>
+          </div>
         </div>
 
-        {/* Hero */}
-        <div className="hero">
+        {/* Right: hero image */}
+        <div className="hero-right">
+          <Image
+            src="/hero.png"
+            alt="Vitastax personalized daily supplement packs"
+            fill
+            priority
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
 
-          {/* Left: copy */}
-          <div className="hero-content">
+      </section>
 
-            <div className="badge">
-              <span className="badge-dot" />
-              Something big is coming
-            </div>
+      {/* ── Countdown + Email ── */}
+      <section className="countdown-strip" id="notify">
+        <p className="countdown-label">Launching in</p>
 
-            <h1>
-              Your Daily Stack,<br />
-              <span className="gradient-text">Perfectly Packed.</span>
-            </h1>
-
-            <p className="subtitle">
-              VitaStax ships 30 pocket-sized daily supplement packs — one for every day of the month.
-              Your custom formula. Your routine. Always on you.
-            </p>
-
-            {/* Feature pills */}
-            <div className="features">
-              {FEATURES.map(f => (
-                <span key={f} className="feature-pill">
-                  <CheckIcon />
-                  {f}
-                </span>
-              ))}
-            </div>
-
-            {/* Email form */}
-            {submitted ? (
-              <div className="success-msg">
-                ✓ &nbsp;You&apos;re on the list — we&apos;ll be in touch!
+        <div className="countdown">
+          {[
+            { val: time.days,  label: 'Days'  },
+            { val: time.hours, label: 'Hours' },
+            { val: time.mins,  label: 'Mins'  },
+            { val: time.secs,  label: 'Secs'  },
+          ].map(({ val, label }, i) => (
+            <>
+              <div key={label} className="cd-unit">
+                <span className="cd-val">{val}</span>
+                <span className="cd-lbl">{label}</span>
               </div>
-            ) : (
-              <form className="notify-form" onSubmit={handleSubmit}>
+              {i < 3 && <span key={`sep-${i}`} className="cd-sep">·</span>}
+            </>
+          ))}
+        </div>
+
+        <div className="email-section">
+          {submitted ? (
+            <p className="email-success">✓ You&apos;re on the list. We&apos;ll be in touch.</p>
+          ) : (
+            <>
+              <form className="email-form" onSubmit={handleSubmit}>
                 <input
                   type="email"
-                  placeholder="Enter your email address"
+                  placeholder="Your email address"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   required
                 />
                 <button type="submit">Notify Me</button>
               </form>
-            )}
-            <p className="form-hint">No spam. Just the launch date + an early-bird offer.</p>
+              <p className="email-hint">No spam. Early-bird offer on launch day.</p>
+            </>
+          )}
+        </div>
+      </section>
 
-            {/* Countdown */}
-            <p className="countdown-label">Launching in</p>
-            <div className="countdown">
-              {[
-                { val: time.days,  label: 'Days'  },
-                { val: time.hours, label: 'Hours' },
-                { val: time.mins,  label: 'Mins'  },
-                { val: time.secs,  label: 'Secs'  },
-              ].map(({ val, label }) => (
-                <div key={label} className="cd-unit">
-                  <div className="cd-val">{val}</div>
-                  <span>{label}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="divider" />
-
-            {/* Social links */}
-            <div className="socials">
-              <a href="#" className="social-link" aria-label="X / Twitter">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-              <a href="#" className="social-link" aria-label="Instagram">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5"/>
-                  <circle cx="12" cy="12" r="4"/>
-                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-                </svg>
-              </a>
-              <a href="#" className="social-link" aria-label="LinkedIn">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
-                  <circle cx="4" cy="4" r="2"/>
-                </svg>
-              </a>
-              <a href="mailto:hello@vitastax.com" className="social-link" aria-label="Email">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="4" width="20" height="16" rx="2"/>
-                  <polyline points="2,4 12,13 22,4"/>
-                </svg>
-              </a>
-            </div>
-
-          </div>{/* /hero-content */}
-
-          {/* Right: product illustration */}
-          <div className="hero-visual">
-            <ProductSVG />
-          </div>
-
-        </div>{/* /hero */}
-      </div>{/* /page */}
-
-      <footer>
-        &copy; 2026 <a href="https://vitastax.com">vitastax.com</a> &mdash; All rights reserved.
+      {/* ── Footer ── */}
+      <footer className="site-footer">
+        <span>&copy; 2026 Vitastax™ — All rights reserved.</span>
+        <div className="footer-links">
+          <a href="mailto:hello@vitastax.com">Contact</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
       </footer>
     </>
   );
