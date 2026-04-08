@@ -510,6 +510,52 @@ h1 strong {
   background: var(--bg);
 }
 
+/* ── FAQ page ────────────────────────────────── */
+.faq-hero {
+  padding: 10rem 5rem 5rem;
+  max-width: 860px;
+}
+.faq-hero h1 {
+  margin-bottom: 1.4rem;
+}
+.faq-hero-sub {
+  font-size: 1.1rem; color: var(--muted); font-weight: 300; line-height: 1.7;
+}
+
+.faq-body {
+  padding: 0 5rem 6rem;
+  display: flex; flex-direction: column; gap: 5rem;
+  max-width: 860px;
+}
+
+.faq-section {}
+
+.faq-list {
+  display: flex; flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.faq-item {
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+}
+.faq-item:hover .faq-question { color: var(--ink); }
+
+.faq-question {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  font-size: 1rem; font-weight: 600; color: var(--ink-2);
+  letter-spacing: -0.2px; line-height: 1.4;
+  transition: color .2s;
+}
+.faq-question svg { flex-shrink: 0; color: var(--muted); }
+
+.faq-answer {
+  font-size: 0.9rem; color: var(--muted); line-height: 1.85; font-weight: 300;
+  margin-top: 1rem; max-width: 680px;
+}
+
 /* ── Footer ──────────────────────────────────── */
 .site-footer {
   padding: 2rem 5rem;
@@ -529,7 +575,7 @@ h1 strong {
   .hiw-stats { grid-template-columns: repeat(2, 1fr); }
   .hiw-stat { border-bottom: 1px solid var(--border); }
   .hiw-values-grid { grid-template-columns: repeat(2, 1fr); }
-  .hiw-steps-section, .hiw-values-section, .hiw-cta-band, .hiw-hero { padding-left: 2rem; padding-right: 2rem; }
+  .hiw-steps-section, .hiw-values-section, .hiw-cta-band, .hiw-hero, .faq-hero, .faq-body { padding-left: 2rem; padding-right: 2rem; }
   .nav { padding: 1.2rem 2rem; }
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero-left { padding: 7rem 2rem 3rem; }
@@ -546,6 +592,6 @@ h1 strong {
   .trust-row { flex-wrap: wrap; gap: 0.75rem; }
   .hiw-values-grid { grid-template-columns: 1fr; }
   .hiw-stats { grid-template-columns: repeat(2, 1fr); }
-  .hiw-steps-section, .hiw-values-section, .hiw-cta-band, .hiw-hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .hiw-steps-section, .hiw-values-section, .hiw-cta-band, .hiw-hero, .faq-hero, .faq-body { padding-left: 1.5rem; padding-right: 1.5rem; }
   .hiw-step { grid-template-columns: 50px 1fr; }
 }

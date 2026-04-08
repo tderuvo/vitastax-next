@@ -115,6 +115,7 @@ export default function HowItWorks() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <Link href="/how-it-works" className="nav-link" style={{ color: 'var(--ink)', fontWeight: 600 }}>How It Works</Link>
           <Link href="/stax" className="nav-link">Our Stax</Link>
+          <Link href="/faq" className="nav-link">FAQ</Link>
           <Link href="/#notify" className="nav-cta">Get Early Access</Link>
         </div>
       </nav>
