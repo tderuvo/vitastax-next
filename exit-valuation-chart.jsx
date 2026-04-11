@@ -78,7 +78,7 @@ function fmt(n) {
 }
 
 function fmtFull(n) {
-  return "$" + n.toLocaleString();
+  return "$" + n.toLocaleString('en-US');
 }
 
 export default function ExitValuationChart() {
@@ -394,7 +394,7 @@ export default function ExitValuationChart() {
                 </div>
                 <div style={{ fontSize: "1.5rem", fontWeight: 800,
                   color: BLUE, letterSpacing: "-0.03em" }}>
-                  {Math.ceil(Number(desiredProfit) / 32).toLocaleString()}
+                  {Math.ceil(Number(desiredProfit) / 32).toLocaleString('en-US')}
                 </div>
               </div>
             )}
