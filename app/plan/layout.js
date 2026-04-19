@@ -7,22 +7,39 @@ export const metadata = {
 
 export default function PlanLayout({ children }) {
   return (
-    <div style={{
-      display: "flex",
-      minHeight: "100vh",
-      fontFamily: "'Inter', 'Arial', sans-serif",
-      background: "#F9FAFB",
-    }}>
-      <PlanNav />
-      <main style={{
-        flex: 1,
-        padding: "2.5rem",
-        maxWidth: 860,
-        boxSizing: "border-box",
-        overflowX: "hidden",
-      }}>
-        {children}
-      </main>
-    </div>
+    <>
+      <style>{`
+        .plan-shell {
+          display: flex;
+          flex-direction: row;
+          min-height: 100vh;
+          font-family: 'Inter', 'Arial', sans-serif;
+          background: #F9FAFB;
+        }
+        .plan-main {
+          flex: 1;
+          padding: 2.5rem;
+          max-width: 860px;
+          box-sizing: border-box;
+          overflow-x: hidden;
+          min-width: 0;
+        }
+        @media (max-width: 768px) {
+          .plan-shell {
+            flex-direction: column;
+          }
+          .plan-main {
+            padding: 1.25rem 1rem;
+            max-width: 100%;
+          }
+        }
+      `}</style>
+      <div className="plan-shell">
+        <PlanNav />
+        <main className="plan-main">
+          {children}
+        </main>
+      </div>
+    </>
   );
 }

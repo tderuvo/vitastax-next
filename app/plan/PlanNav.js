@@ -1,23 +1,100 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
-const NAVY  = "#1A1A2E";
-const BLUE  = "#1D4ED8";
+const NAVY = "#1A1A2E";
+const BLUE = "#1D4ED8";
 const WHITE = "#FFFFFF";
 
 const links = [
-  { href: "/plan",            label: "Overview",         icon: "◎" },
-  { href: "/plan/financials", label: "Financials",        icon: "＄" },
-  { href: "/plan/roadmap",    label: "Roadmap",           icon: "→" },
-  { href: "/plan/exit",       label: "Exit Valuation",    icon: "↗" },
-  { href: "/plan/market",     label: "Market Landscape",  icon: "⬡" },
-  { href: "/plan/risks",      label: "Risks",             icon: "△" },
+  { href: "/plan",            label: "Overview",        icon: "◎" },
+  { href: "/plan/financials", label: "Financials",       icon: "＄" },
+  { href: "/plan/roadmap",    label: "Roadmap",          icon: "→" },
+  { href: "/plan/exit",       label: "Exit Valuation",   icon: "↗" },
+  { href: "/plan/market",     label: "Market",           icon: "⬡" },
+  { href: "/plan/risks",      label: "Risks",            icon: "△" },
 ];
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
 
 export default function PlanNav() {
   const pathname = usePathname();
+  const isMobile = useIsMobile();
 
+  if (isMobile) {
+    return (
+      <div style={{ background: NAVY, width: "100%", position: "sticky", top: 0, zIndex: 50 }}>
+        {/* Brand row */}
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0.75rem 1rem",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        }}>
+          <span style={{ fontWeight: 800, color: WHITE, fontSize: "1rem",
+            letterSpacing: "-0.02em" }}>
+            VitaStax™
+          </span>
+          <span style={{
+            background: "rgba(29,78,216,0.25)",
+            border: "1px solid rgba(29,78,216,0.4)",
+            borderRadius: 20,
+            padding: "0.2rem 0.65rem",
+            fontSize: "0.58rem",
+            fontWeight: 700,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: "#93C5FD",
+          }}>
+            Partner Portal
+          </span>
+        </div>
+
+        {/* Scrollable nav links */}
+        <div style={{
+          display: "flex",
+          overflowX: "auto",
+          padding: "0.5rem 0.75rem",
+          gap: "0.35rem",
+          WebkitOverflowScrolling: "touch",
+          scrollbarWidth: "none",
+        }}>
+          {links.map(({ href, label }) => {
+            const isActive = pathname === href;
+            return (
+              <Link key={href} href={href} style={{
+                textDecoration: "none",
+                flexShrink: 0,
+                padding: "0.45rem 0.85rem",
+                borderRadius: 20,
+                fontSize: "0.78rem",
+                fontWeight: isActive ? 700 : 400,
+                color: isActive ? WHITE : "rgba(255,255,255,0.5)",
+                background: isActive ? "rgba(255,255,255,0.15)" : "transparent",
+                border: isActive ? "1px solid rgba(255,255,255,0.2)" : "1px solid transparent",
+                whiteSpace: "nowrap",
+              }}>
+                {label}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop sidebar
   return (
     <aside style={{
       width: 220,
@@ -33,7 +110,6 @@ export default function PlanNav() {
       height: "100vh",
       overflowY: "auto",
     }}>
-      {/* Brand */}
       <div style={{ padding: "0 1.5rem", marginBottom: "2rem" }}>
         <div style={{ fontWeight: 800, color: WHITE, fontSize: "1.1rem",
           letterSpacing: "-0.02em" }}>
@@ -54,7 +130,6 @@ export default function PlanNav() {
         </div>
       </div>
 
-      {/* Nav links */}
       <nav style={{ flex: 1, padding: "0 0.75rem", display: "flex",
         flexDirection: "column", gap: 2 }}>
         {links.map(({ href, label, icon }) => {
@@ -77,11 +152,8 @@ export default function PlanNav() {
                 width: 16, textAlign: "center", flexShrink: 0 }}>
                 {icon}
               </span>
-              <span style={{
-                fontSize: "0.85rem",
-                fontWeight: isActive ? 700 : 400,
-                color: isActive ? WHITE : "rgba(255,255,255,0.5)",
-              }}>
+              <span style={{ fontSize: "0.85rem", fontWeight: isActive ? 700 : 400,
+                color: isActive ? WHITE : "rgba(255,255,255,0.5)" }}>
                 {label}
               </span>
               {isActive && (
@@ -93,16 +165,10 @@ export default function PlanNav() {
         })}
       </nav>
 
-      {/* Back to site */}
-      <div style={{ padding: "1.5rem 1.5rem 0", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <Link href="/" style={{
-          fontSize: "0.75rem",
-          color: "rgba(255,255,255,0.3)",
-          textDecoration: "none",
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-        }}>
+      <div style={{ padding: "1.5rem 1.5rem 0",
+        borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+        <Link href="/" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)",
+          textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}>
           ← Back to site
         </Link>
       </div>
