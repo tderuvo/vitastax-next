@@ -8,7 +8,7 @@ export const metadata = {
 export default function PlanLayout({ children }) {
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .plan-shell {
           display: flex;
           flex-direction: row;
@@ -25,15 +25,10 @@ export default function PlanLayout({ children }) {
           min-width: 0;
         }
         @media (max-width: 768px) {
-          .plan-shell {
-            flex-direction: column;
-          }
-          .plan-main {
-            padding: 1.25rem 1rem;
-            max-width: 100%;
-          }
+          .plan-shell { flex-direction: column; }
+          .plan-main { padding: 1.25rem 1rem; max-width: 100%; }
         }
-      `}</style>
+      ` }} />
       <div className="plan-shell">
         <PlanNav />
         <main className="plan-main">
