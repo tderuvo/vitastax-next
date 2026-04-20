@@ -168,6 +168,48 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Explainer Video ── */}
+      <section style={{
+        background: '#F9FAFB',
+        borderTop: '1px solid #E5E7EB',
+        padding: '4rem 1.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '1.25rem',
+      }}>
+        <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.12em',
+          textTransform: 'uppercase', color: '#6B7280', margin: 0 }}>
+          See How It Works
+        </p>
+        <h2 style={{ fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', fontWeight: 800,
+          color: '#111827', letterSpacing: '-0.02em', margin: 0, textAlign: 'center' }}>
+          The VitaStax Story
+        </h2>
+        <p style={{ fontSize: '0.92rem', color: '#6B7280', margin: 0,
+          textAlign: 'center', maxWidth: 480, lineHeight: 1.7 }}>
+          Watch our founder explain why personalized supplement stacks change everything.
+        </p>
+        <div style={{
+          width: '100%', maxWidth: 720,
+          position: 'relative', paddingTop: '56.25%',
+          borderRadius: 12, overflow: 'hidden',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+        }}>
+          <iframe
+            src="https://www.youtube.com/embed/XDC9a8eD9Ng"
+            title="VitaStax Explainer"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%',
+              border: 'none',
+            }}
+          />
+        </div>
+      </section>
+
       {/* ── Footer ── */}
       <footer className="site-footer">
         <span>&copy; 2026 Vitastax™ — All rights reserved.</span>
