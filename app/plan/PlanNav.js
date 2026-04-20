@@ -14,6 +14,7 @@ const links = [
   { href: "/plan/exit",       label: "Exit Valuation",   icon: "↗" },
   { href: "/plan/market",     label: "Market",           icon: "⬡" },
   { href: "/plan/risks",      label: "Risks",            icon: "△" },
+  { href: "/plan/competition", label: "Competition",      icon: "⊕" },
 ];
 
 function useIsMobile() {

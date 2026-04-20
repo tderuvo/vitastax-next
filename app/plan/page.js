@@ -66,7 +66,8 @@ const sections = [
   { href: "/plan/roadmap",    icon: "→",  title: "Roadmap",          desc: "Phase-by-phase growth plan from 10 to 1,000 subscribers. What happens at each milestone and what it unlocks.", color: BLUE },
   { href: "/plan/exit",       icon: "↗",  title: "Exit Valuation",   desc: "Interactive tool to model our exit value at each subscriber milestone. Click any stage to see the full picture.", color: PURPLE },
   { href: "/plan/market",     icon: "⬡",  title: "Market Landscape", desc: "Supplement M&A history — who bought what, for how much, and what it means for VitaStax's upside potential.", color: "#CA8A04" },
-  { href: "/plan/risks",      icon: "△",  title: "Risks",            desc: "An honest look at what could go wrong — churn, regulatory, fulfillment, CAC, and the IRS obligation.", color: "#DC2626" },
+  { href: "/plan/risks",       icon: "△",  title: "Risks",            desc: "An honest look at what could go wrong — churn, regulatory, fulfillment, CAC, and the IRS obligation.", color: "#DC2626" },
+  { href: "/plan/competition", icon: "⊕",  title: "Competition",      desc: "Market overview, subscription competitors, and a full strengths-vs-weaknesses breakdown of brands that feel like VitaStax.", color: "#0D9488" },
 ];
 
 const compareRows = [
