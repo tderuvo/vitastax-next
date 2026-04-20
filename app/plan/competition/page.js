@@ -1,3 +1,6 @@
+"use client";
+import { useState } from "react";
+
 const NAVY   = "#1A1A2E";
 const BLUE   = "#1D4ED8";
 const WHITE  = "#FFFFFF";
@@ -36,11 +39,173 @@ const CSS = `
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
   }
+  .comp-matrix-wrap {
+    position: relative;
+    width: 100%;
+    background: #FAFAFA;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .comp-matrix-wrap svg { display: block; width: 100%; height: auto; }
+  .comp-dot { cursor: pointer; }
+  .comp-dot circle { transition: r 0.15s; }
+  .comp-dot:hover circle.dot-ring { opacity: 1; }
   @media (max-width: 768px) {
     .comp-market-stats { grid-template-columns: repeat(2, 1fr); }
     .comp-sw-grid { grid-template-columns: 1fr; }
   }
 `;
+
+// SVG plot area: x[105,580], y[52,430]. Center: (342,241).
+// X-axis: Protocol Simplicity (left) → Protocol Sophistication (right)
+// Y-axis: Static Daily Routine (bottom) → Dynamic / Cycling Protocol (top)
+const matrixDots = [
+  { id: "vitastax",     label: "VitaStax™",      x: 528, y: 72,  isUs: true,  color: TEAL,   labelDx: 13,  labelDy: 4,   note: "The only cycling protocol — sophisticated & dynamic by design." },
+  { id: "momentous",   label: "Momentous",       x: 488, y: 345, isUs: false, color: MID,    labelDx: 11,  labelDy: -14, note: "Elite protocol depth, NSF-certified — but ships the same static daily stack." },
+  { id: "thorne",      label: "Thorne",           x: 450, y: 368, isUs: false, color: MID,    labelDx: -10, labelDy: 16,  note: "Clinical-grade science — retail auto-ship model, no cycling logic." },
+  { id: "onnit",       label: "Onnit",            x: 408, y: 262, isUs: false, color: MID,    labelDx: 11,  labelDy: 4,   note: "Stacking ethos — but DIY assembly, no guided cycling sequence." },
+  { id: "foursig",     label: "Four Sigmatic",    x: 268, y: 192, isUs: false, color: MID,    labelDx: -92, labelDy: -14, note: "Cycling narrative — seasonal drops, not a systematic protocol." },
+  { id: "careof",      label: "Care/of",          x: 345, y: 372, isUs: false, color: MID,    labelDx: 11,  labelDy: -14, note: "Best predecessor — personalized at signup, static forever after." },
+  { id: "ritual",      label: "Ritual",           x: 252, y: 385, isUs: false, color: MID,    labelDx: -54, labelDy: -14, note: "Premium trust leader — beautiful brand, identical pack every 30 days." },
+  { id: "persona",     label: "Persona",          x: 295, y: 402, isUs: false, color: MID,    labelDx: 11,  labelDy: 14,  note: "AI quiz personalization — static outcome, no monthly evolution." },
+  { id: "ag1",         label: "AG1",              x: 148, y: 393, isUs: false, color: MID,    labelDx: -38, labelDy: -14, note: "1M+ subscribers — single all-in-one SKU, same scoop every day." },
+  { id: "gainful",     label: "Gainful",          x: 205, y: 402, isUs: false, color: MID,    labelDx: 11,  labelDy: 14,  note: "Personalized protein/nutrition — sports-narrow, no cycling mechanism." },
+  { id: "hims",        label: "Hims",             x: 118, y: 418, isUs: false, color: MID,    labelDx: -44, labelDy: 4,   note: "1.3M subscribers — supplements secondary to pharma-adjacent model." },
+];
+
+function CompetitorMatrix() {
+  const [active, setActive] = useState(null);
+  const dot = matrixDots.find(d => d.id === active);
+
+  return (
+    <div style={{ marginBottom: "2.5rem" }}>
+      <div style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em",
+        textTransform: "uppercase", color: MID, marginBottom: "0.75rem",
+        paddingBottom: "0.5rem", borderBottom: "1px solid #E5E7EB" }}>
+        Competitive Positioning Matrix
+      </div>
+
+      <div className="comp-matrix-wrap">
+        <svg viewBox="0 0 660 500" aria-label="Competitive positioning matrix">
+          <defs>
+            <linearGradient id="zoneGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor={TEAL} stopOpacity="0.06" />
+              <stop offset="100%" stopColor={TEAL} stopOpacity="0.14" />
+            </linearGradient>
+          </defs>
+
+          {/* Quadrant backgrounds */}
+          {/* Bottom-left: Simple & Static */}
+          <rect x="105" y="241" width="237" height="189" fill="#F9FAFB" />
+          {/* Bottom-right: Sophisticated & Static */}
+          <rect x="342" y="241" width="238" height="189" fill="#F3F4F6" />
+          {/* Top-left: Simple & Cycling (empty) */}
+          <rect x="105" y="52" width="237" height="189" fill="#F9FAFB" />
+          {/* Top-right: VitaStax zone */}
+          <rect x="342" y="52" width="238" height="189" fill="url(#zoneGrad)" />
+          <rect x="342" y="52" width="238" height="189" fill="none" stroke={TEAL} strokeWidth="1.5" strokeDasharray="5,4" strokeOpacity="0.35" />
+
+          {/* Axis lines */}
+          <line x1="105" y1="241" x2="580" y2="241" stroke="#D1D5DB" strokeWidth="1.5" />
+          <line x1="342" y1="52"  x2="342" y2="430" stroke="#D1D5DB" strokeWidth="1.5" />
+
+          {/* Plot border */}
+          <rect x="105" y="52" width="475" height="378" fill="none" stroke="#E5E7EB" strokeWidth="1" />
+
+          {/* Axis arrows */}
+          <polygon points="580,237 588,241 580,245" fill="#9CA3AF" />
+          <polygon points="338,52 342,44 346,52" fill="#9CA3AF" />
+
+          {/* X-axis label */}
+          <text x="105" y="470" fontSize="10" fontWeight="700" fill="#9CA3AF" letterSpacing="1" textAnchor="start">SIMPLE / SINGLE-PRODUCT</text>
+          <text x="580" y="470" fontSize="10" fontWeight="700" fill="#9CA3AF" letterSpacing="1" textAnchor="end">PROTOCOL SOPHISTICATION</text>
+          <line x1="260" y1="467" x2="430" y2="467" stroke="#D1D5DB" strokeWidth="1" />
+          <polygon points="430,464 437,467 430,470" fill="#D1D5DB" />
+
+          {/* Y-axis label */}
+          <text x="28" y="430" fontSize="10" fontWeight="700" fill="#9CA3AF" letterSpacing="1" textAnchor="middle" transform="rotate(-90, 28, 330)">STATIC DAILY ROUTINE</text>
+          <text x="28" y="52"  fontSize="10" fontWeight="700" fill="#9CA3AF" letterSpacing="1" textAnchor="middle" transform="rotate(-90, 28, 150)">DYNAMIC / CYCLING</text>
+          <line x1="31" y1="300" x2="31" y2="175" stroke="#D1D5DB" strokeWidth="1" />
+          <polygon points="28,175 31,168 34,175" fill="#D1D5DB" />
+
+          {/* Quadrant corner labels */}
+          <text x="116" y="72"  fontSize="9" fontWeight="600" fill="#9CA3AF">Simple &amp; Cycling</text>
+          <text x="353" y="72"  fontSize="9" fontWeight="700" fill={TEAL}>Sophisticated + Cycling</text>
+          <text x="116" y="422" fontSize="9" fontWeight="600" fill="#9CA3AF">Simple &amp; Static</text>
+          <text x="353" y="422" fontSize="9" fontWeight="600" fill="#9CA3AF">Sophisticated &amp; Static</text>
+
+          {/* VitaStax zone label */}
+          <text x="462" y="88" fontSize="8.5" fontWeight="700" fill={TEAL} opacity="0.7">VitaStax zone</text>
+
+          {/* Competitor dots */}
+          {matrixDots.map(({ id, label, x, y, isUs, labelDx, labelDy }) => (
+            <g key={id} className="comp-dot"
+              onMouseEnter={() => setActive(id)}
+              onMouseLeave={() => setActive(null)}>
+              {isUs ? (
+                <>
+                  <circle cx={x} cy={y} r={active === id ? 14 : 11} fill={TEAL} opacity="0.18" />
+                  <circle cx={x} cy={y} r={active === id ? 8  : 6.5} fill={TEAL} />
+                  <circle cx={x} cy={y} r={active === id ? 14 : 11} fill="none" stroke={TEAL} strokeWidth="1.5" strokeDasharray="3,2" opacity="0.5" />
+                </>
+              ) : (
+                <>
+                  <circle cx={x} cy={y} r={active === id ? 9 : 5.5} fill={active === id ? "#374151" : "#9CA3AF"} />
+                </>
+              )}
+              <text
+                x={x + labelDx}
+                y={y + labelDy}
+                fontSize={isUs ? "11" : "9.5"}
+                fontWeight={isUs ? "800" : active === id ? "700" : "500"}
+                fill={isUs ? TEAL : active === id ? DARK : "#6B7280"}
+                style={{ pointerEvents: "none", userSelect: "none" }}
+              >
+                {label}
+              </text>
+            </g>
+          ))}
+        </svg>
+      </div>
+
+      {/* Tooltip card */}
+      <div style={{
+        marginTop: "0.75rem",
+        minHeight: "3.5rem",
+        background: dot ? (dot.isUs ? NAVY : WHITE) : WHITE,
+        border: `1px solid ${dot ? (dot.isUs ? TEAL + "55" : "#E5E7EB") : "#E5E7EB"}`,
+        borderRadius: 8,
+        padding: "0.85rem 1.25rem",
+        transition: "all 0.15s",
+        display: "flex",
+        alignItems: "center",
+        gap: "1rem",
+      }}>
+        {dot ? (
+          <>
+            <div style={{ width: 8, height: 8, borderRadius: "50%", flexShrink: 0,
+              background: dot.isUs ? TEAL : "#6B7280" }} />
+            <div>
+              <div style={{ fontSize: "0.8rem", fontWeight: 700,
+                color: dot.isUs ? WHITE : DARK, marginBottom: 2 }}>
+                {dot.label}
+              </div>
+              <div style={{ fontSize: "0.82rem", color: dot.isUs ? "rgba(255,255,255,0.6)" : MID,
+                lineHeight: 1.6 }}>
+                {dot.note}
+              </div>
+            </div>
+          </>
+        ) : (
+          <div style={{ fontSize: "0.82rem", color: "#9CA3AF" }}>
+            Hover over any dot to see positioning details.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 const marketSegments = [
   { label: "Vitamins & Minerals",   share: "32%", trend: "Steady",    color: BLUE   },
@@ -251,6 +416,8 @@ export default function CompetitionPage() {
           ))}
         </div>
       </div>
+
+      <CompetitorMatrix />
 
       {/* Section 1 — Market Overview */}
       <Section title="Section 01 — Supplement Market Overview">
